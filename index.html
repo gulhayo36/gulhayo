@@ -132,6 +132,17 @@
             <div id="webcam-container"></div>
             <div id="label-container"></div>
         </div>
+        <div class="camera-box">
+    <p style="margin-bottom: 20px; opacity: 0.8;">Modelni boshqarish:</p>
+    
+    <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+        <button class="btn-start" type="button" onclick="init()">Kamerani Yoqish</button>
+        <button class="btn-start" type="button" onclick="stopWebcam()" style="background: #444; box-shadow: 0 0 15px #222;">O'chirish</button>
+    </div>
+
+    <div id="webcam-container"></div>
+    <div id="label-container"></div>
+</div>
     </div>
     <div id="kamera" class="page" style="text-align: center;">
     <h2 class="name" style="font-size: 50px;">AI Kamera</h2>
@@ -205,6 +216,21 @@ async function stopWebcam() {
 
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
+            // Kamerani to'xtatish funksiyasi
+async function stopWebcam() {
+    if (webcam) {
+        // 1. Kameraning kadr uzatishini to'xtatamiz
+        await webcam.stop(); 
+        
+        // 2. Videoni ekrandan butunlay olib tashlaymiz
+        document.getElementById("webcam-container").innerHTML = ""; 
+        
+        // 3. Natijalar ko'rsatkichini tozalaymiz
+        document.getElementById("label-container").innerHTML = "<div style='color: #888; font-size: 14px;'>Kamera muvaffaqiyatli o'chirildi</div>";
+        
+        console.log("Kamera to'xtatildi");
+    }
+}
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
                     prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
@@ -213,4 +239,5 @@ async function stopWebcam() {
         }
     </script>
 </body>
+
 </html>
