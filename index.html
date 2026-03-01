@@ -3,61 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gulhayo | AI Researcher Portfolio</title>
+    <title>Gulhayo | AI Researcher</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     
     <style>
-        :root { --pink: #ff1493; --glow: #ff69b4; --dark: #0a0118; --blue: #00bfff; --purple: #8a2be2; }
+        :root { --pink: #ff1493; --glow: #ff69b4; --dark: #0a0118; --blue: #00bfff; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body { 
-            background: var(--dark); color: white; min-height: 100vh; overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 20%, rgba(255, 20, 147, 0.25), transparent 70%);
+            background: var(--dark); color: white; min-height: 100vh;
+            background-image: radial-gradient(circle at 50% 20%, rgba(255, 20, 147, 0.2), transparent 70%);
         }
 
         /* Navigatsiya */
         nav { display: flex; justify-content: center; margin: 20px 0; position: sticky; top: 10px; z-index: 1000; }
         .nav-container { 
-            background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(20px);
-            padding: 10px 30px; border-radius: 50px; border: 1px solid rgba(255, 20, 147, 0.3);
-            display: flex; gap: 20px; box-shadow: 0 0 20px rgba(255, 20, 147, 0.1);
+            background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(15px);
+            padding: 10px 25px; border-radius: 50px; border: 1px solid rgba(255, 20, 147, 0.3);
+            display: flex; gap: 20px;
         }
-        .nav-container a { color: white; text-decoration: none; font-size: 13px; cursor: pointer; transition: 0.3s; opacity: 0.8; }
-        .nav-container a:hover { color: var(--glow); text-shadow: 0 0 10px var(--pink); opacity: 1; }
+        .nav-container a { color: white; text-decoration: none; font-size: 14px; cursor: pointer; transition: 0.3s; }
+        .nav-container a:hover { color: var(--glow); text-shadow: 0 0 10px var(--pink); }
 
         /* Sahifalar */
-        .page { display: none; padding: 20px; animation: fadeIn 0.6s ease-out; }
+        .page { display: none; padding: 20px; animation: fadeIn 0.5s ease; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Sarlavha dizayni */
-        .hero { text-align: center; margin-top: 40px; }
-        .name { font-family: 'Dancing Script', cursive; font-size: 70px; color: var(--glow); text-shadow: 0 0 20px var(--pink); margin-bottom: 5px; }
-        .sub-text { letter-spacing: 3px; font-size: 14px; opacity: 0.8; text-transform: uppercase; }
-
-        /* Grid va Kartalar */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 50px auto; }
-        .card { 
-            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 20, 147, 0.2);
-            border-radius: 20px; padding: 30px; text-align: center; cursor: pointer; transition: 0.4s;
-            backdrop-filter: blur(10px);
+        /* Bosh Sahifa va Profil Rasmi */
+        .hero { text-align: center; margin-top: 30px; }
+        .profile-img { 
+            width: 180px; height: 180px; border-radius: 50%; 
+            border: 3px solid var(--pink); box-shadow: 0 0 20px var(--pink);
+            object-fit: cover; margin-bottom: 20px;
         }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 0 25px rgba(255, 20, 147, 0.4); border-color: var(--pink); }
+        .name { font-family: 'Dancing Script', cursive; font-size: 60px; color: var(--glow); text-shadow: 0 0 20px var(--pink); }
 
-        /* Kamera Bo'limi */
-        .camera-box { max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; border: 1px solid var(--blue); }
-        #webcam-container { margin: 20px auto; border: 4px solid var(--blue); border-radius: 20px; overflow: hidden; width: 200px; height: 200px; background: #000; }
-        .btn-neon { background: linear-gradient(45deg, var(--blue), var(--purple)); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; margin: 5px; transition: 0.3s; font-weight: 600; }
-        .btn-stop { background: #333; box-shadow: none; border: 1px solid #555; }
-        .btn-stop:hover { background: #444; }
+        /* Kartalar */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin: 40px auto; }
+        .card { 
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 20, 147, 0.2);
+            border-radius: 20px; padding: 25px; text-align: center; transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--pink); box-shadow: 0 0 20px rgba(255, 20, 147, 0.3); }
 
-        /* Aloqa tugmalari */
-        .contact-link { display: block; color: white; text-decoration: none; margin: 15px 0; padding: 15px; border-radius: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--blue); transition: 0.3s; }
-        .contact-link:hover { background: var(--blue); color: var(--dark); transform: scale(1.02); }
-        .earth-glow { position: fixed; bottom: -120px; left: 50%; transform: translateX(-50%); width: 140%; height: 300px; background: radial-gradient(circle, rgba(0, 162, 255, 0.2), transparent 70%); z-index: -1; }
+        /* Kamera */
+        .camera-box { max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 25px; border: 1px solid var(--blue); }
+        #webcam-container { margin: 20px auto; border: 3px solid var(--blue); border-radius: 15px; overflow: hidden; width: 200px; height: 200px; background: #000; margin-left: auto; margin-right: auto; }
+        .btn-neon { background: linear-gradient(45deg, var(--blue), #8a2be2); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; }
+        .btn-stop { background: #444; }
+
+        /* Aloqa */
+        .contact-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: 1px solid var(--blue); color: white; text-decoration: none; transition: 0.3s; }
+        .contact-btn:hover { background: var(--blue); color: black; }
     </style>
 </head>
 <body>
@@ -70,118 +71,82 @@
             <a onclick="showPage('aloqa')">Aloqa</a>
         </div>
     </nav>
-
     <div id="home" class="page active">
         <div class="hero">
+            <img src="profil.jpg" alt="Gulhayo" class="profile-img">
             <h1 class="name">Gulhayo Abdug'aniyeva</h1>
-            <p class="sub-text">AI Researcher Portfolio</p>
+            <p style="letter-spacing: 2px; opacity: 0.8; margin-top: 10px;">AI RESEARCHER PORTFOLIO</p>
         </div>
         <div class="grid">
-            <div class="card" onclick="showPage('maqolalar')"><h3>📄 Maqolalar</h3><p>Mening ilmiy ishlarim</p></div>
+            <div class="card" onclick="showPage('maqolalar')"><h3>📄 Maqolalar</h3><p>Ilmiy ishlarim</p></div>
             <div class="card" onclick="showPage('kamera')"><h3>🧠 AI Kamera</h3><p>Modelni sinash</p></div>
-            <div class="card" onclick="showPage('aloqa')"><h3>📱 Aloqa</h3><p>Men bilan bog'lanish</p></div>
         </div>
     </div>
 
     <div id="maqolalar" class="page">
-        <h2 class="name" style="font-size: 50px; text-align: center;">Maqolalarim</h2>
-        <div class="grid" style="grid-template-columns: 1fr; max-width: 700px;">
+        <h2 class="name" style="font-size: 45px; text-align: center;">Maqolalarim</h2>
+        <div class="grid" style="grid-template-columns: 1fr; max-width: 600px;">
             <div class="card" style="text-align: left;">
-                <h3>Sun'iy intellekt va ma'lumotlar bazasi</h3>
-                <p style="margin: 10px 0; opacity: 0.7;">Modern education and development (ISSN: 3060-4567)</p>
-                <a href="313-320.pdf" target="_blank"><button class="btn-neon">PDF O'qish</button></a>
-            </div>
-            <div class="card" style="text-align: left;">
-                <h3>ResOAK-2025 Maqola</h3>
-                <p style="margin: 10px 0; opacity: 0.7;">Toshkent Davlat Iqtisodiyot Universiteti anjumani.</p>
-                <a href="Maqola2025.pdf" target="_blank"><button class="btn-neon">PDF O'qish</button></a>
+                <h3>Sun'iy intellekt va jamiyat</h3>
+                <p style="font-size: 14px; margin: 10px 0;">ISSN: 3060-4567 maqolasi</p>
+                <a href="313-320.pdf" target="_blank"><button class="btn-neon">O'qish</button></a>
             </div>
         </div>
     </div>
 
     <div id="kamera" class="page">
-        <h2 class="name" style="font-size: 50px; text-align: center;">AI Kamera</h2>
+        <h2 class="name" style="font-size: 45px; text-align: center;">AI Kamera</h2>
         <div class="camera-box" style="text-align: center;">
-            <div style="margin-bottom: 20px;">
-                <button class="btn-neon" onclick="init()">Kamerani ishga tushitish</button>
-                <button class="btn-neon btn-stop" onclick="stopWebcam()">To'xtatish</button>
-            </div>
+            <button class="btn-neon" onclick="init()">Yoqish</button>
+            <button class="btn-neon btn-stop" onclick="stopWebcam()">O'chirish</button>
             <div id="webcam-container"></div>
-            <div id="label-container" style="margin-top: 15px; color: var(--blue); font-weight: bold; font-size: 18px;"></div>
+            <div id="label-container" style="color: var(--blue); font-weight: bold;"></div>
         </div>
     </div>
 
     <div id="aloqa" class="page">
-        <h2 class="name" style="font-size: 50px; text-align: center;">Bog'lanish</h2>
-        <div class="grid" style="grid-template-columns: 1fr; max-width: 500px;">
+        <h2 class="name" style="font-size: 45px; text-align: center;">Aloqa</h2>
+        <div class="grid" style="grid-template-columns: 1fr; max-width: 400px;">
             <div class="card">
-                <a href="https://t.me/gulhayo36" target="_blank" class="contact-link">✈️ Telegram: @Ruzmatovna-G</a>
-                <a href="mailto:gulhayoabduganiyeva36@gmail.com" class="contact-link">📧 Email: gulhayoabduganiyeva36@gmail.com</a>
-                <a href="tel:+998901234567" class="contact-link">📞 Telefon: +998 33 003 16 06</a>
+                <a href="https://t.me/gulhayo36" class="contact-btn">Telegram: @gulhayo36</a>
+                <a href="mailto:gulhayoabduganiyeva36@gmail.com" class="contact-btn">Email yuborish</a>
             </div>
         </div>
     </div>
 
-    <div class="earth-glow"></div>
-
     <script>
-        // Sahifalarni almashtirish
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
             if (pageId !== 'kamera') stopWebcam();
         }
 
-        // AI Kamera sozlamalari
         const URL = "https://teachablemachine.withgoogle.com/models/v_XPF4oYq/"; 
         let model, webcam, labelContainer, maxPredictions, animationId;
+
         async function init() {
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-            
-            try {
-                model = await tmImage.load(modelURL, metadataURL);
-                maxPredictions = model.getTotalClasses();
-
-                webcam = new tmImage.Webcam(200, 200, true); 
-                await webcam.setup(); 
-                await webcam.play();
-                animationId = window.requestAnimationFrame(loop);
-
-                document.getElementById("webcam-container").innerHTML = ""; 
-                document.getElementById("webcam-container").appendChild(webcam.canvas);
-                labelContainer = document.getElementById("label-container");
-                labelContainer.innerHTML = "Kamera yuklanmoqda...";
-            } catch (err) {
-                alert("Kameraga ruxsat berilmadi yoki xatolik yuz berdi.");
-            }
+            model = await tmImage.load(URL + "model.json", URL + "metadata.json");
+            maxPredictions = model.getTotalClasses();
+            webcam = new tmImage.Webcam(200, 200, true); 
+            await webcam.setup(); await webcam.play();
+            animationId = window.requestAnimationFrame(loop);
+            document.getElementById("webcam-container").innerHTML = ""; 
+            document.getElementById("webcam-container").appendChild(webcam.canvas);
+            labelContainer = document.getElementById("label-container");
         }
 
-        async function loop() {
-            if(webcam && webcam.canvas) {
-                webcam.update();
-                await predict();
-                animationId = window.requestAnimationFrame(loop);
-            }
-        }
-
+        async function loop() { webcam.update(); await predict(); animationId = window.requestAnimationFrame(loop); }
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
-            labelContainer.innerHTML = "";
-            for (let i = 0; i < maxPredictions; i++) {
-                const div = document.createElement("div");
-                div.innerHTML = prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
-                labelContainer.appendChild(div);
-            }
+            labelContainer.innerHTML = prediction[0].className + ": " + (prediction[0].probability * 100).toFixed(0) + "%";
         }
 
-        async function stopWebcam() {
+        function stopWebcam() {
             if (webcam) {
-                await webcam.stop();
+                webcam.stop();
                 window.cancelAnimationFrame(animationId);
                 document.getElementById("webcam-container").innerHTML = "";
-                if(labelContainer) labelContainer.innerHTML = "Kamera to'xtatildi.";
+                labelContainer.innerHTML = "Kamera o'chirildi";
                 webcam = null;
             }
         }
