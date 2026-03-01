@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gulhayo Abdug'aniyeva - AI Researcher va Developer portfoliosi. Maqolalar va AI loyihalar.">
-    <meta name="keywords" content="Gulhayo, AI, Gulhayo AI, Abduganiyeva, Qarshi DU, Sun'iy intellekt maqolalar">
-    <meta name="author" content="Gulhayo Abdug'aniyeva">
-    <title>Gulhayo | AI Researcher & Developer</title>
+    <title>Gulhayo | Portfolio</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     
     <style>
-        :root { --pink: #ff1493; --glow: #ff69b4; --dark: #0a0118; --blue: #00bfff; }
+        :root { --pink: #ff1493; --glow: #ff69b4; --dark: #0a0118; --blue: #00bfff; --purple: #8a2be2; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body { 
@@ -20,8 +18,8 @@
             background-image: radial-gradient(circle at 50% 20%, rgba(255, 20, 147, 0.25), transparent 70%);
         }
 
-        /* Navigatsiya */
-        nav { display: flex; justify-content: center; margin: 20px 0; position: sticky; top: 10px; z-index: 100; }
+        /* Navigatsiya - Menyular ishlashi uchun muhim */
+        nav { display: flex; justify-content: center; margin: 20px 0; position: sticky; top: 10px; z-index: 1000; }
         .nav-container { 
             background: rgba(255, 255, 255, 0.07); backdrop-filter: blur(20px);
             padding: 10px 30px; border-radius: 50px; border: 1px solid rgba(255, 20, 147, 0.3);
@@ -35,53 +33,24 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Bosh Sahifa Dizayni */
+        /* Bosh Sahifa */
         .hero { text-align: center; margin-top: 20px; }
-        .profile-ring {
-            width: 170px; height: 170px; border-radius: 50%; margin: 0 auto;
-            padding: 5px; background: linear-gradient(45deg, var(--pink), #8a2be2);
-            box-shadow: 0 0 30px var(--pink); position: relative;
-        }
-        .profile-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--dark); }
-        .name { font-family: 'Dancing Script', cursive; font-size: 70px; color: var(--glow); text-shadow: 0 0 20px var(--pink), 0 0 40px var(--pink); margin: 10px 0; }
-        .sub-name { letter-spacing: 4px; font-weight: 300; text-transform: uppercase; font-size: 14px; opacity: 0.9; margin-top: -10px; }
-        
-        /* Kartalar */
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 900px; margin: 50px auto; }
+        .name { font-family: 'Dancing Script', cursive; font-size: 70px; color: var(--glow); text-shadow: 0 0 20px var(--pink); margin: 10px 0; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; max-width: 900px; margin: 50px auto; }
         .card { 
             background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 20, 147, 0.2);
-            border-radius: 20px; padding: 25px 10px; text-align: center; cursor: pointer; transition: 0.4s;
+            border-radius: 20px; padding: 25px; text-align: center; cursor: pointer; transition: 0.4s;
             backdrop-filter: blur(10px);
         }
         .card:hover { transform: translateY(-10px); box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); border-color: var(--pink); }
-        .card i { font-size: 30px; display: block; margin-bottom: 10px; filter: drop-shadow(0 0 5px var(--pink)); }
-        .card h3 { font-size: 16px; color: var(--glow); margin-bottom: 5px; }
-        .card p { font-size: 11px; opacity: 0.6; }
 
-        /* AI Kamera Maxsus Dizayn */
-        .camera-box { 
-            max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.05); 
-            padding: 30px; border-radius: 30px; border: 1px solid var(--blue);
-            box-shadow: 0 0 30px rgba(0, 191, 255, 0.2);
-            }
-        #webcam-container { 
-            margin: 20px auto; border: 4px solid var(--blue); border-radius: 20px; 
-            overflow: hidden; width: 208px; height: 208px; box-shadow: 0 0 20px var(--blue);
-        }
-        #label-container div { 
-            background: rgba(0, 191, 255, 0.1); margin: 5px 0; padding: 8px; 
-            border-radius: 10px; font-size: 16px; color: var(--blue); text-shadow: 0 0 5px var(--blue);
-        }
-        .btn-start { 
-            background: linear-gradient(45deg, var(--blue), var(--purple)); color: white; 
-            border: none; padding: 15px 45px; border-radius: 30px; font-size: 18px; 
-            cursor: pointer; box-shadow: 0 0 20px var(--blue); transition: 0.3s;
-        }
+        /* Kamera Bo'limi */
+        .camera-box { max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 30px; border: 1px solid var(--blue); }
+        #webcam-container { margin: 20px auto; border: 4px solid var(--blue); border-radius: 20px; overflow: hidden; width: 200px; height: 200px; background: #000; }
+        .btn-neon { background: linear-gradient(45deg, var(--blue), var(--purple)); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; margin: 5px; transition: 0.3s; }
+        .btn-stop { background: #333; box-shadow: 0 0 10px #000; }
 
-        /* Pastki Dunyo Effekti */
         .earth-glow { position: fixed; bottom: -120px; left: 50%; transform: translateX(-50%); width: 140%; height: 300px; background: radial-gradient(circle, rgba(0, 162, 255, 0.25), transparent 70%); z-index: -1; }
-
-        @media (max-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } .name { font-size: 55px; } }
     </style>
 </head>
 <body>
@@ -91,141 +60,100 @@
             <a onclick="showPage('home')">Bosh Sahifa</a>
             <a onclick="showPage('maqolalar')">Maqolalar</a>
             <a onclick="showPage('kamera')">AI Kamera</a>
-            <a onclick="showPage('aloqa')">Aloqa</a>
         </div>
     </nav>
-
     <div id="home" class="page active">
         <div class="hero">
-            <div class="profile-ring">
-                <img src="profil.jpg" alt="Gulhayo"> </div>
-            <h1 class="name">Gulhayo</h1>
-            <p class="sub-name">AI Researcher & Creative Developer</p>
+            <h1 class="name">Gulhayo Abdug'aniyeva</h1>
+            <p style="text-align: center; opacity: 0.8; letter-spacing: 2px;">AI RESEARCHER PORTFOLIO</p>
         </div>
         <div class="grid">
-            <div class="card" onclick="showPage('home')"><i>📖</i><h3>Biografiya</h3><p>Men haqimda</p></div>
-            <div class="card" onclick="showPage('maqolalar')"><i>📄</i><h3>Maqolalar</h3><p>Ilmiy ishlarim</p></div>
-            <div class="card" onclick="showPage('kamera')"><i>🧠</i><h3>AI Kamera</h3><p>Modelni sinash</p></div>
-            <div class="card" onclick="showPage('aloqa')"><i>📱</i><h3>Aloqa</h3><p>Bog'lanish</p></div>
+            <div class="card" onclick="showPage('maqolalar')"><h3>📄 Maqolalar</h3><p>Mening ilmiy ishlarim</p></div>
+            <div class="card" onclick="showPage('kamera')"><h3>🧠 AI Kamera</h3><p>Modelni sinash</p></div>
         </div>
     </div>
 
-    <div class="card" style="text-align: left;">
-    <h3>Sun'iy intellekt yordamida ma'lumotlar bazasining jamiyat hayotidagi roli</h3>
-    <p style="font-size: 13px; margin: 10px 0; opacity: 0.8;">
-        Ushbu maqolada SI texnologiyalarining ma'lumotlar bazasini boshqarishdagi o'rni tahlil qilingan.
-    </p>
-    <a href="313-320.pdf" target="_blank" style="text-decoration:none;">
-        <button class="btn-neon">PDF O'qish</button>
-    </a>
-</div>
-
-<div class="card" style="text-align: left;">
-    <h3>Sun'iy intellekt nazariyasi va amaliyoti (ResOAK-2025)</h3>
-    <p style="font-size: 13px; margin: 10px 0; opacity: 0.8;">
-        II Respublika ilmiy-amaliy anjumani materiallar to'plami uchun tayyorlangan maqola.
-    </p>
-    <a href="Maqola2025.pdf" target="_blank" style="text-decoration:none;">
-        <button class="btn-neon">PDF O'qish</button>
-    </a>
-</div>
-                <h3>1. Sun'iy Intellekt va Kelajak</h3>
-                <p>AI texnologiyalarining 2030-yilgacha bo'lgan rivojlanish yo'li va jamiyatga ta'siri haqida ilmiy tahlil.</p>
+    <div id="maqolalar" class="page">
+        <h2 class="name" style="font-size: 50px; text-align: center;">Maqolalarim</h2>
+        <div class="grid" style="grid-template-columns: 1fr; max-width: 700px;">
+            <div class="card" style="text-align: left;">
+                <h3>Sun'iy intellekt va ma'lumotlar bazasi</h3>
+                <p style="margin: 10px 0; opacity: 0.7;">Jamiyat hayotidagi SI roli.</p>
+                <a href="313-320.pdf" target="_blank"><button class="btn-neon">PDF O'qish</button></a>
             </div>
-            <div class="card">
-                <h3>2. Datasetlar yaratish va TM modeli</h3>
-                <p>Ushbu maqolada Teachable Machine yordamida tasvirlarni tanib olish modellarini yaratish jarayoni yoritilgan.</p>
+            <div class="card" style="text-align: left;">
+                <h3>ResOAK-2025 Maqola</h3>
+                <p style="margin: 10px 0; opacity: 0.7;">Anjuman ilmiy ishi.</p>
+                <a href="Maqola ResOAK-2025 ajratilgani.pdf" target="_blank"><button class="btn-neon">PDF O'qish</button></a>
             </div>
         </div>
     </div>
 
-   <div id="kamera" class="page" style="text-align: center;">
-    <h2 class="name" style="font-size: 50px;">AI Kamera</h2>
-    <div class="camera-box">
-        <p style="margin-bottom: 20px; opacity: 0.8;">Modelni ishga tushirish uchun yoqish tugmasini bosing:</p>
-        
-        <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
-            <button class="btn-start" type="button" onclick="init()" style="background: linear-gradient(45deg, var(--blue), var(--purple));">Yoqish</button>
-            <button class="btn-start" type="button" onclick="stopWebcam()" style="background: #444; box-shadow: 0 0 10px #000;">O'chirish</button>
+    <div id="kamera" class="page">
+        <h2 class="name" style="font-size: 50px; text-align: center;">AI Kamera</h2>
+        <div class="camera-box" style="text-align: center;">
+            <button class="btn-neon" onclick="init()">Yoqish</button>
+            <button class="btn-neon btn-stop" onclick="stopWebcam()">O'chirish</button>
+            <div id="webcam-container"></div>
+            <div id="label-container" style="color: var(--blue); font-weight: bold;"></div>
         </div>
-
-        <div id="webcam-container"></div>
-        <div id="label-container"></div>
     </div>
-</div>
 
     <div class="earth-glow"></div>
 
     <script>
-        // Kamerani to'xtatish uchun yangi kod
-async function stopWebcam() {
-    if (webcam) {
-        
-}
-        // Sahifalarni boshqarish
+        // MENYUNI BOSHQARISH FUNKSIYASI
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
+            if (pageId !== 'kamera') stopWebcam(); // Kamera sahifasidan chiqsa o'chadi
         }
 
-        // --- TEACHABLE MACHINE MODELINGIZ ---
+        // AI KAMERA KODI
         const URL = "https://teachablemachine.withgoogle.com/models/v_XPF4oYq/"; 
+        let model, webcam, labelContainer, maxPredictions, animationId;
 
-        let model, webcam, labelContainer, maxPredictions;
         async function init() {
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
-
             model = await tmImage.load(modelURL, metadataURL);
             maxPredictions = model.getTotalClasses();
 
-            const flip = true; 
-            webcam = new tmImage.Webcam(200, 200, flip); 
+            webcam = new tmImage.Webcam(200, 200, true); 
             await webcam.setup(); 
             await webcam.play();
-            window.requestAnimationFrame(loop);
+            animationId = window.requestAnimationFrame(loop);
 
             document.getElementById("webcam-container").innerHTML = ""; 
             document.getElementById("webcam-container").appendChild(webcam.canvas);
             labelContainer = document.getElementById("label-container");
-            labelContainer.innerHTML = "";
-            for (let i = 0; i < maxPredictions; i++) {
-                labelContainer.appendChild(document.createElement("div"));
-            }
         }
 
         async function loop() {
             webcam.update();
             await predict();
-            window.requestAnimationFrame(loop);
+            animationId = window.requestAnimationFrame(loop);
         }
 
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
-            // Kamerani to'xtatish funksiyasi
-async function stopWebcam() {
-    if (webcam) {
-        // 1. Kameraning kadr uzatishini to'xtatamiz
-        await webcam.stop(); 
-        
-        // 2. Videoni ekrandan butunlay olib tashlaymiz
-        document.getElementById("webcam-container").innerHTML = ""; 
-        
-        // 3. Natijalar ko'rsatkichini tozalaymiz
-        document.getElementById("label-container").innerHTML = "<div style='color: #888; font-size: 14px;'>Kamera muvaffaqiyatli o'chirildi</div>";
-        
-        console.log("Kamera to'xtatildi");
-    }
-}
+            labelContainer.innerHTML = "";
             for (let i = 0; i < maxPredictions; i++) {
-                const classPrediction =
-                    prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
-                labelContainer.childNodes[i].innerHTML = classPrediction;
+                const div = document.createElement("div");
+                div.innerHTML = prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
+                labelContainer.appendChild(div);
+            }
+        }
+
+        async function stopWebcam() {
+            if (webcam) {
+                await webcam.stop();
+                window.cancelAnimationFrame(animationId);
+                document.getElementById("webcam-container").innerHTML = "";
+                labelContainer.innerHTML = "Kamera o'chirildi.";
+                webcam = null;
             }
         }
     </script>
 </body>
-
 </html>
-
