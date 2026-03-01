@@ -155,10 +155,32 @@
 
         async function loop() { webcam.update(); await predict(); animationId = window.requestAnimationFrame(loop); }
         async function predict() {
-            const prediction = await model.predict(webcam.canvas);
-            labelContainer.innerHTML = prediction[0].className + ": " + (prediction[0].probability * 100).toFixed(0) + "%";
-        }
+    // Model orqali bashorat qilish
+    const prediction = await model.predict(webcam.canvas);
+    
+    // Label konteynerini tozalash yoki yangilash
+    labelContainer.innerHTML = ""; 
 
+    for (let i = 0; i < maxPredictions; i++) {
+        // Har bir klass nomi va uning foizini olish
+        const className = prediction[i].className;
+        const probability = (prediction[i].probability * 100).toFixed(0);
+
+        // Ekranga chiqarish uchun yangi qator yaratish
+        const resDiv = document.createElement("div");
+        resDiv.style.margin = "5px 0";
+        resDiv.style.padding = "8px";
+        resDiv.style.border = "1px solid #00bfff";
+        resDiv.style.borderRadius = "10px";
+        resDiv.style.color = "#00bfff";
+        resDiv.style.fontWeight = "bold";
+        
+        // Matnni yozish (Masalan: Kabutar: 90% yoki Boshqa narsalar: 10%)
+        resDiv.innerHTML = className + ": " + probability + "%";
+        
+        labelContainer.appendChild(resDiv);
+    }
+}
         function stopWebcam() {
             if (webcam) {
                 webcam.stop();
@@ -171,3 +193,4 @@
     </script>
 </body>
 </html>
+
