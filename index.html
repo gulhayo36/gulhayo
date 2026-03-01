@@ -110,10 +110,25 @@
         </div>
     </div>
 
-    <div id="maqolalar" class="page">
-        <h2 class="name" style="font-size: 50px; text-align: center;">Mening Maqolalarim</h2>
-        <div class="grid" style="grid-template-columns: 1fr; max-width: 650px;">
-            <div class="card">
+    <div class="card" style="text-align: left;">
+    <h3>Sun'iy intellekt yordamida ma'lumotlar bazasining jamiyat hayotidagi roli</h3>
+    <p style="font-size: 13px; margin: 10px 0; opacity: 0.8;">
+        Ushbu maqolada SI texnologiyalarining ma'lumotlar bazasini boshqarishdagi o'rni tahlil qilingan.
+    </p>
+    <a href="313-320.pdf" target="_blank" style="text-decoration:none;">
+        <button class="btn-neon">PDF O'qish</button>
+    </a>
+</div>
+
+<div class="card" style="text-align: left;">
+    <h3>Sun'iy intellekt nazariyasi va amaliyoti (ResOAK-2025)</h3>
+    <p style="font-size: 13px; margin: 10px 0; opacity: 0.8;">
+        II Respublika ilmiy-amaliy anjumani materiallar to'plami uchun tayyorlangan maqola.
+    </p>
+    <a href="Maqola2025.pdf" target="_blank" style="text-decoration:none;">
+        <button class="btn-neon">PDF O'qish</button>
+    </a>
+</div>
                 <h3>1. Sun'iy Intellekt va Kelajak</h3>
                 <p>AI texnologiyalarining 2030-yilgacha bo'lgan rivojlanish yo'li va jamiyatga ta'siri haqida ilmiy tahlil.</p>
             </div>
@@ -124,34 +139,16 @@
         </div>
     </div>
 
-    <div id="kamera" class="page" style="text-align: center;">
-        <h2 class="name" style="font-size: 50px;">AI Kamera</h2>
-        <div class="camera-box">
-            <p style="margin-bottom: 20px; opacity: 0.8;">Modelni ishga tushirish uchun quyidagi tugmani bosing va kameraga ruxsat bering.</p>
-            <button class="btn-start" type="button" onclick="init()">Kamerani Yoqish</button>
-            <div id="webcam-container"></div>
-            <div id="label-container"></div>
-        </div>
-        <div class="camera-box">
-    <p style="margin-bottom: 20px; opacity: 0.8;">Modelni boshqarish:</p>
-    
-    <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
-        <button class="btn-start" type="button" onclick="init()">Kamerani Yoqish</button>
-        <button class="btn-start" type="button" onclick="stopWebcam()" style="background: #444; box-shadow: 0 0 15px #222;">O'chirish</button>
-    </div>
-
-    <div id="webcam-container"></div>
-    <div id="label-container"></div>
-</div>
-    </div>
-    <div id="kamera" class="page" style="text-align: center;">
+   <div id="kamera" class="page" style="text-align: center;">
     <h2 class="name" style="font-size: 50px;">AI Kamera</h2>
     <div class="camera-box">
-        <p style="margin-bottom: 20px; opacity: 0.8;">Modelni boshqarish:</p>
+        <p style="margin-bottom: 20px; opacity: 0.8;">Modelni ishga tushirish uchun yoqish tugmasini bosing:</p>
         
-        <button class="btn-start" type="button" onclick="init()">Kamerani Yoqish</button>
-        <button class="btn-start" type="button" onclick="stopWebcam()" style="background: #444; margin-left: 10px; box-shadow: 0 0 15px #222;">O'chirish</button>
-        
+        <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+            <button class="btn-start" type="button" onclick="init()" style="background: linear-gradient(45deg, var(--blue), var(--purple));">Yoqish</button>
+            <button class="btn-start" type="button" onclick="stopWebcam()" style="background: #444; box-shadow: 0 0 10px #000;">O'chirish</button>
+        </div>
+
         <div id="webcam-container"></div>
         <div id="label-container"></div>
     </div>
@@ -163,17 +160,7 @@
         // Kamerani to'xtatish uchun yangi kod
 async function stopWebcam() {
     if (webcam) {
-        // 1. Kameraning kadrlar olishini to'xtatamiz
-        await webcam.stop(); 
         
-        // 2. Videoni ekrandan o'chirib tashlaymiz
-        document.getElementById("webcam-container").innerHTML = ""; 
-        
-        // 3. Natijalar chiqadigan joyni tozalaymiz
-        document.getElementById("label-container").innerHTML = "<div style='color: #888;'>Kamera to'xtatildi</div>";
-        
-        console.log("Webcam muvaffaqiyatli o'chirildi.");
-    }
 }
         // Sahifalarni boshqarish
         function showPage(pageId) {
@@ -241,3 +228,4 @@ async function stopWebcam() {
 </body>
 
 </html>
+
