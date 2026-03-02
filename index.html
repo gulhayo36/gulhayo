@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gulhayo | AI Researcher</title>
+    <title>Gulhayo | AI Researcher Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -15,71 +15,59 @@
         
         body { 
             background: var(--dark); color: white; min-height: 100vh;
-            background-image: url('https://img.freepik.com/free-vector/night-ocean-landscape-with-full-moon-stars_107791-6854.jpg'); 
-            background-size: cover; background-attachment: fixed;
-            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 20%, rgba(255, 20, 147, 0.25), transparent 70%);
         }
 
-        /* Bezaklar - Siz xohlagan gullar va kapalaklar */
-        .butterfly { position: fixed; width: 45px; pointer-events: none; z-index: 10; animation: fly 15s infinite linear; opacity: 0.7; }
-        @keyframes fly {
-            0% { transform: translate(-100px, 80vh) rotate(0deg); }
-            50% { transform: translate(50vw, 40vh) rotate(20deg); }
-            100% { transform: translate(110vw, -100px) rotate(-20deg); }
-        }
-        .flower-decor { position: fixed; width: 220px; z-index: 5; pointer-events: none; filter: drop-shadow(0 0 15px var(--pink)); }
-        .top-left { top: -40px; left: -40px; }
-        .bottom-right { bottom: -40px; right: -40px; transform: rotate(180deg); }
-
-        /* Navigatsiya - O'z holiga qaytdi */
+        /* Navigatsiya */
         nav { display: flex; justify-content: center; margin: 20px 0; position: sticky; top: 10px; z-index: 1000; }
         .nav-container { 
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
-            padding: 10px 25px; border-radius: 50px; border: 1px solid var(--pink);
-            display: flex; gap: 15px; box-shadow: 0 0 15px var(--pink);
+            background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px);
+            padding: 10px 25px; border-radius: 50px; border: 1px solid rgba(255, 20, 147, 0.3);
+            display: flex; gap: 15px;
         }
-        .nav-container a { color: white; text-decoration: none; font-size: 13px; cursor: pointer; transition: 0.3s; font-weight: 600; }
+        .nav-container a { color: white; text-decoration: none; font-size: 13px; cursor: pointer; transition: 0.3s; }
         .nav-container a:hover { color: var(--glow); text-shadow: 0 0 10px var(--pink); }
 
         /* Sahifalar */
-        .page { display: none; padding: 20px; animation: fadeIn 0.8s ease; }
+        .page { display: none; padding: 20px; animation: fadeIn 0.5s ease; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Bio Box - O'z holiga qaytdi */
-        .hero { text-align: center; margin-top: 30px; }
-        .profile-img { width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--pink); box-shadow: 0 0 20px var(--pink); object-fit: cover; }
-        .name { font-family: 'Dancing Script', cursive; font-size: 55px; color: var(--glow); text-shadow: 0 0 15px var(--pink); margin: 10px 0; }
-        .bio-box {
-            background: rgba(10, 1, 24, 0.85); backdrop-filter: blur(12px);
-            max-width: 700px; margin: 20px auto; padding: 25px;
-            border-radius: 20px; border: 1px solid var(--pink);
-            line-height: 1.7; font-size: 14px; box-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+        /* Bosh Sahifa */
+        .hero { text-align: center; margin-top: 20px; }
+        .profile-img { 
+            width: 150px; height: 150px; border-radius: 50%; 
+            border: 3px solid var(--pink); box-shadow: 0 0 20px var(--pink);
+            object-fit: cover; margin-bottom: 15px;
         }
+        .name { font-family: 'Dancing Script', cursive; font-size: 50px; color: var(--glow); text-shadow: 0 0 15px var(--pink); }
+        .bio-text { max-width: 500px; margin: 15px auto; line-height: 1.6; opacity: 0.9; font-size: 14px; }
+
+        /* Kartalar (Maqolalar uchun) */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto; }
+        .card { 
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 20, 147, 0.2);
+            border-radius: 20px; padding: 25px; text-align: center; transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--pink); box-shadow: 0 0 30px rgba(255, 20, 147, 0.3); }
 
         /* AI Kamera Bo'limi */
-        .camera-box { max-width: 450px; margin: 0 auto; background: rgba(0,0,0,0.8); padding: 25px; border-radius: 25px; border: 2px solid var(--blue); text-align: center; }
-        #webcam-container { margin: 15px auto; border: 3px solid var(--blue); border-radius: 15px; overflow: hidden; width: 220px; height: 220px; margin-left: auto; margin-right: auto; background: #000; }
-        .result-tag { background: rgba(0, 191, 255, 0.1); border: 1px solid var(--blue); color: var(--blue); padding: 8px; margin: 5px; border-radius: 10px; font-weight: bold; }
-        .btn-neon { background: linear-gradient(45deg, var(--blue), #8a2be2); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; margin: 5px; }
-
-        /* Dataset Jadvali - Sayt qotmasligi uchun */
-        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; color: white; }
-        .data-table th { color: var(--pink); border-bottom: 1px solid var(--pink); padding: 10px; }
-        .data-table td { padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .camera-box { max-width: 450px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 25px; border: 1px solid var(--blue); text-align: center; }
+        #webcam-container { margin: 15px auto; border: 3px solid var(--blue); border-radius: 15px; overflow: hidden; width: 220px; height: 220px; background: #000; margin-left: auto; margin-right: auto; }
+        .btn-neon { background: linear-gradient(45deg, var(--blue), #8a2be2); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin: 5px; font-weight: 600; }
+        #label-container { margin-top: 15px; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+        /* Aloqa */
+        .contact-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 1px solid var(--blue); color: white; text-decoration: none; text-align: center; transition: 0.3s; }
+        .contact-btn:hover { background: var(--blue); color: black; }
     </style>
 </head>
 <body>
 
-    <img src="https://www.pngarts.com/files/1/Pink-Flower-PNG-Transparent-Image.png" class="flower-decor top-left">
-    <img src="https://www.pngarts.com/files/1/Pink-Flower-PNG-Transparent-Image.png" class="flower-decor bottom-right">
-    <img src="https://www.pngmart.com/files/11/Pink-Butterfly-PNG-Photos.png" class="butterfly">
-
     <nav>
         <div class="nav-container">
             <a onclick="showPage('home')">Bosh Sahifa</a>
+            <a onclick="showPage('maqolalar')">Maqolalar</a>
             <a onclick="showPage('kamera')">AI Kamera</a>
-            <a onclick="showPage('dataset')">Dataset</a>
             <a onclick="showPage('aloqa')">Aloqa</a>
         </div>
     </nav>
@@ -88,47 +76,40 @@
         <div class="hero">
             <img src="profil.jpg" alt="Gulhayo" class="profile-img">
             <h1 class="name">Gulhayo Abdug'aniyeva</h1>
-            <div class="bio-box">
-                Men Qarshi davlat universiteti, Kompyuter ilmlari fakulteti, Axborot tizimlari va texnologiyalari yo‘nalishi talabasiman. 
-                Hozirda Sun’iy intellekt va intellektual ma’lumotlar bazasini boshqarish yo‘nalishlarida ilmiy izlanishlar olib boryapman. 
-                <br><br>
-                Maqsadim — murakkab algoritmlar yordamida insoniyat mushkulini oson qiladigan raqamli yechimlar yaratish.
-                <br><br>
-                Universitet sayti: <a href="http://qarshidu.uz" target="_blank" style="color: var(--blue); text-decoration: underline;">qarshidu.uz</a>
+            <p class="bio-text">
+                Qarshi davlat universiteti, Kompyuter ilmlari fakulteti, Axborot tizimlari va texnologiyalari yo‘nalishi talabasiman. 
+                <br>
+                Universitet sayti: <a href="http://qarshidu.uz" target="_blank" style="color: var(--blue);">qarshidu.uz</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="maqolalar" class="page">
+        <h2 class="name" style="font-size: 40px; text-align: center;">Maqolalarim</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Sun'iy intellekt va jamiyat</h3>
+                <p style="font-size: 13px; opacity: 0.7; margin: 10px 0;">Ilmiy izlanishlar natijalari va maqolalar to'plami.</p>
+                <a href="313-320.pdf" target="_blank"><button class="btn-neon">O'qish</button></a>
             </div>
         </div>
     </div>
 
     <div id="kamera" class="page">
         <div class="camera-box">
-            <h3 style="color: var(--glow); margin-bottom: 10px;">AI Obyektni Aniqlash</h3>
+            <h2 class="name" style="font-size: 30px;">AI Kamera</h2>
             <button class="btn-neon" onclick="init()">Start</button>
-            <button class="btn-neon" style="background: #333;" onclick="stopWebcam()">Stop</button>
+            <button class="btn-neon" style="background: #444;" onclick="stopWebcam()">Stop</button>
             <div id="webcam-container"></div>
             <div id="label-container"></div>
         </div>
     </div>
 
-    <div id="dataset" class="page">
-        <div class="bio-box">
-            <h2 class="name" style="font-size: 35px;">Tadqiqot Dataseti</h2>
-            <div style="max-height: 300px; overflow-y: auto;">
-                <table class="data-table">
-                    <thead><tr><th>ID</th><th>Obyekt</th><th>Aniqlovchi (%)</th></tr></thead>
-                    <tbody>
-                        <tr><td>01</td><td>Kabutar</td><td>98%</td></tr>
-                        <tr><td>02</td><td>Inson</td><td>15%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
     <div id="aloqa" class="page">
-        <div class="bio-box">
-            <h2 class="name" style="font-size: 35px;">Bog'lanish</h2>
-            <p>Telegram: <a href="https://t.me/gulhayo36" target="_blank" style="color: var(--blue);">@gulhayo36</a></p>
-            <p>Email: gulhayoabduganiyeva36@gmail.com</p>
+        <h2 class="name" style="font-size: 40px; text-align: center;">Aloqa</h2>
+        <div style="max-width: 400px; margin: 0 auto;">
+            <a href="https://t.me/gulhayo36" target="_blank" class="contact-btn">Telegram: @gulhayo36</a>
+            <a href="mailto:gulhayoabduganiyeva36@gmail.com" class="contact-btn">Email yuborish</a>
         </div>
     </div>
 
@@ -140,27 +121,25 @@
         }
 
         // SIZNING YANGI MODEL LINKINGIZ
-        const URL = "https://teachablemachine.withgoogle.com/models/RF7GAuukE/";
+        const URL = "https://teachablemachine.withgoogle.com/models/RF7GAuukE/"; 
+
         let model, webcam, labelContainer, maxPredictions, animationId;
 
         async function init() {
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
-            model = await tmImage.load(modelURL, metadataURL);
+            model = await tmImage.load(URL + "model.json", URL + "metadata.json");
             maxPredictions = model.getTotalClasses();
-
-            const flip = true; 
-            webcam = new tmImage.Webcam(220, 220, flip); 
+            webcam = new tmImage.Webcam(220, 220, true); 
             await webcam.setup(); 
             await webcam.play();
             animationId = window.requestAnimationFrame(loop);
-
-            document.getElementById("webcam-container").innerHTML = "";
+            document.getElementById("webcam-container").innerHTML = ""; 
             document.getElementById("webcam-container").appendChild(webcam.canvas);
             labelContainer = document.getElementById("label-container");
             labelContainer.innerHTML = "";
             for (let i = 0; i < maxPredictions; i++) {
-                labelContainer.appendChild(document.createElement("div"));
+                const div = document.createElement("div");
+                div.className = "result-tag";
+                labelContainer.appendChild(div);
             }
         }
 
@@ -171,12 +150,10 @@
                 animationId = window.requestAnimationFrame(loop);
             }
         }
-
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction = prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
-                labelContainer.childNodes[i].className = "result-tag";
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
         }
@@ -193,3 +170,5 @@
     </script>
 </body>
 </html>
+        
+        .result-tag { background: rgba(0, 191, 255, 0.1); padding: 8px 15px; border-radius: 10px; border: 1px solid rgba(0, 191, 255, 0.3); width: 85%; font-size: 14px; color: var(--blue); font-weight: 600; }
