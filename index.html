@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* Bezaklar */
+        /* Bezaklar - Siz xohlagan gullar va kapalaklar */
         .butterfly { position: fixed; width: 45px; pointer-events: none; z-index: 10; animation: fly 15s infinite linear; opacity: 0.7; }
         @keyframes fly {
             0% { transform: translate(-100px, 80vh) rotate(0deg); }
@@ -31,7 +31,7 @@
         .top-left { top: -40px; left: -40px; }
         .bottom-right { bottom: -40px; right: -40px; transform: rotate(180deg); }
 
-        /* Navigatsiya */
+        /* Navigatsiya - O'z holiga qaytdi */
         nav { display: flex; justify-content: center; margin: 20px 0; position: sticky; top: 10px; z-index: 1000; }
         .nav-container { 
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
@@ -46,25 +46,27 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Bio Box */
+        /* Bio Box - O'z holiga qaytdi */
+        .hero { text-align: center; margin-top: 30px; }
+        .profile-img { width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--pink); box-shadow: 0 0 20px var(--pink); object-fit: cover; }
+        .name { font-family: 'Dancing Script', cursive; font-size: 55px; color: var(--glow); text-shadow: 0 0 15px var(--pink); margin: 10px 0; }
         .bio-box {
             background: rgba(10, 1, 24, 0.85); backdrop-filter: blur(12px);
             max-width: 700px; margin: 20px auto; padding: 25px;
             border-radius: 20px; border: 1px solid var(--pink);
             line-height: 1.7; font-size: 14px; box-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
-            text-align: center;
         }
 
-        /* AI Kamera */
+        /* AI Kamera Bo'limi */
         .camera-box { max-width: 450px; margin: 0 auto; background: rgba(0,0,0,0.8); padding: 25px; border-radius: 25px; border: 2px solid var(--blue); text-align: center; }
         #webcam-container { margin: 15px auto; border: 3px solid var(--blue); border-radius: 15px; overflow: hidden; width: 220px; height: 220px; margin-left: auto; margin-right: auto; background: #000; }
         .result-tag { background: rgba(0, 191, 255, 0.1); border: 1px solid var(--blue); color: var(--blue); padding: 8px; margin: 5px; border-radius: 10px; font-weight: bold; }
+        .btn-neon { background: linear-gradient(45deg, var(--blue), #8a2be2); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; margin: 5px; }
 
-        /* Dataset Jadvali */
-        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
+        /* Dataset Jadvali - Sayt qotmasligi uchun */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; color: white; }
         .data-table th { color: var(--pink); border-bottom: 1px solid var(--pink); padding: 10px; }
         .data-table td { padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .btn-neon { background: linear-gradient(45deg, var(--blue), #8a2be2); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; margin: 5px; }
     </style>
 </head>
 <body>
@@ -83,14 +85,16 @@
     </nav>
 
     <div id="home" class="page active">
-        <div style="text-align: center;">
-            <img src="profil.jpg" alt="Gulhayo" style="width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--pink); box-shadow: 0 0 20px var(--pink); object-fit: cover;">
-            <h1 class="name" style="font-family: 'Dancing Script'; font-size: 50px; color: var(--glow);">Gulhayo Abdug'aniyeva</h1>
+        <div class="hero">
+            <img src="profil.jpg" alt="Gulhayo" class="profile-img">
+            <h1 class="name">Gulhayo Abdug'aniyeva</h1>
             <div class="bio-box">
                 Men Qarshi davlat universiteti, Kompyuter ilmlari fakulteti, Axborot tizimlari va texnologiyalari yo‘nalishi talabasiman. 
                 Hozirda Sun’iy intellekt va intellektual ma’lumotlar bazasini boshqarish yo‘nalishlarida ilmiy izlanishlar olib boryapman. 
                 <br><br>
-                Universitet rasmiy sayti: <a href="http://qarshidu.uz" target="_blank" style="color: var(--blue);">qarshidu.uz</a>
+                Maqsadim — murakkab algoritmlar yordamida insoniyat mushkulini oson qiladigan raqamli yechimlar yaratish.
+                <br><br>
+                Universitet sayti: <a href="http://qarshidu.uz" target="_blank" style="color: var(--blue); text-decoration: underline;">qarshidu.uz</a>
             </div>
         </div>
     </div>
@@ -98,26 +102,22 @@
     <div id="kamera" class="page">
         <div class="camera-box">
             <h3 style="color: var(--glow); margin-bottom: 10px;">AI Obyektni Aniqlash</h3>
-            <button class="btn-neon" onclick="init()">Kamerani Yoqish</button>
-            <button class="btn-neon" style="background: #333;" onclick="stopWebcam()">To'xtatish</button>
+            <button class="btn-neon" onclick="init()">Start</button>
+            <button class="btn-neon" style="background: #333;" onclick="stopWebcam()">Stop</button>
             <div id="webcam-container"></div>
             <div id="label-container"></div>
         </div>
     </div>
 
     <div id="dataset" class="page">
-        <h2 class="name" style="text-align: center; font-size: 40px;">Ma'lumotlar To'plami</h2>
         <div class="bio-box">
-            <p>Tadqiqot uchun foydalanilgan dataset namunalari:</p>
+            <h2 class="name" style="font-size: 35px;">Tadqiqot Dataseti</h2>
             <div style="max-height: 300px; overflow-y: auto;">
                 <table class="data-table">
-                    <thead>
-                        <tr><th>ID</th><th>Obyekt</th><th>Aniqlik</th><th>Sana</th></tr>
-                    </thead>
+                    <thead><tr><th>ID</th><th>Obyekt</th><th>Aniqlovchi (%)</th></tr></thead>
                     <tbody>
-                        <tr><td>001</td><td>Kabutar</td><td>0.98</td><td>2024-05-10</td></tr>
-                        <tr><td>002</td><td>Inson</td><td>0.12</td><td>2024-05-10</td></tr>
-                        <tr><td>003</td><td>Boshqa</td><td>0.05</td><td>2024-05-11</td></tr>
+                        <tr><td>01</td><td>Kabutar</td><td>98%</td></tr>
+                        <tr><td>02</td><td>Inson</td><td>15%</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -126,7 +126,7 @@
 
     <div id="aloqa" class="page">
         <div class="bio-box">
-            <h2 class="name">Bog'lanish</h2>
+            <h2 class="name" style="font-size: 35px;">Bog'lanish</h2>
             <p>Telegram: <a href="https://t.me/gulhayo36" target="_blank" style="color: var(--blue);">@gulhayo36</a></p>
             <p>Email: gulhayoabduganiyeva36@gmail.com</p>
         </div>
@@ -140,8 +140,7 @@
         }
 
         // SIZNING YANGI MODEL LINKINGIZ
-        const URL = "https://teachablemachine.withgoogle.com/models/RF7GAuukE/"; 
-
+        const URL = "https://teachablemachine.withgoogle.com/models/RF7GAuukE/";
         let model, webcam, labelContainer, maxPredictions, animationId;
 
         async function init() {
@@ -176,8 +175,7 @@
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
             for (let i = 0; i < maxPredictions; i++) {
-                const classPrediction =
-                    prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
+                const classPrediction = prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
                 labelContainer.childNodes[i].className = "result-tag";
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
