@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gulhayo | AI Researcher Portfolio</title>
+    <title>Gulhayo Abduganiyeva | Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -15,50 +15,55 @@
         
         body { 
             background: var(--dark); color: white; min-height: 100vh;
-            background-image: radial-gradient(circle at 50% 20%, rgba(255, 20, 147, 0.25), transparent 70%);
+            background-image: radial-gradient(circle at 50% 20%, rgba(255, 20, 147, 0.2), transparent 80%);
+            overflow-x: hidden;
         }
 
         /* Navigatsiya */
         nav { display: flex; justify-content: center; margin: 20px 0; position: sticky; top: 10px; z-index: 1000; }
         .nav-container { 
-            background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px);
             padding: 10px 25px; border-radius: 50px; border: 1px solid rgba(255, 20, 147, 0.3);
-            display: flex; gap: 15px;
+            display: flex; gap: 20px;
         }
         .nav-container a { color: white; text-decoration: none; font-size: 13px; cursor: pointer; transition: 0.3s; }
         .nav-container a:hover { color: var(--glow); text-shadow: 0 0 10px var(--pink); }
 
         /* Sahifalar */
-        .page { display: none; padding: 20px; animation: fadeIn 0.5s ease; }
+        .page { display: none; padding: 20px; animation: fadeIn 0.4s ease; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Bosh Sahifa */
-        .hero { text-align: center; margin-top: 20px; }
-        .profile-img { 
-            width: 150px; height: 150px; border-radius: 50%; 
-            border: 3px solid var(--pink); box-shadow: 0 0 20px var(--pink);
-            object-fit: cover; margin-bottom: 15px;
-        }
-        .name { font-family: 'Dancing Script', cursive; font-size: 50px; color: var(--glow); text-shadow: 0 0 15px var(--pink); }
-        .bio-text { max-width: 500px; margin: 15px auto; line-height: 1.6; opacity: 0.9; font-size: 14px; }
+        /* Profil qismi */
+        .hero { text-align: center; margin-top: 30px; }
+        .profile-img { width: 140px; height: 140px; border-radius: 50%; border: 3px solid var(--pink); box-shadow: 0 0 20px var(--pink); margin-bottom: 10px; }
+        .name { font-family: 'Dancing Script', cursive; font-size: 48px; color: var(--glow); text-shadow: 0 0 15px var(--pink); }
+        .sub-title { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 20px; }
 
-        /* Kartalar (Maqolalar uchun) */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin: 30px auto; }
-        .card { 
+        /* Rasmda ko'rsatilgan 4 talik menyu */
+        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 600px; margin: 30px auto; }
+        @media (min-width: 600px) { .menu-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .menu-card { 
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 20, 147, 0.2);
-            border-radius: 20px; padding: 25px; text-align: center; transition: 0.3s;
+            border-radius: 15px; padding: 20px 10px; text-align: center; cursor: pointer; transition: 0.3s;
         }
-        .card:hover { transform: translateY(-10px); border-color: var(--pink); box-shadow: 0 0 30px rgba(255, 20, 147, 0.3); }
+        .menu-card:hover { transform: translateY(-5px); border-color: var(--pink); background: rgba(255, 20, 147, 0.1); }
+        .menu-card i { font-size: 24px; display: block; margin-bottom: 10px; }
+        .menu-card h3 { font-size: 14px; color: var(--pink); }
+        .menu-card p { font-size: 10px; opacity: 0.7; }
 
-        /* AI Kamera Bo'limi */
-        .camera-box { max-width: 450px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 25px; border: 1px solid var(--blue); text-align: center; }
-        #webcam-container { margin: 15px auto; border: 3px solid var(--blue); border-radius: 15px; overflow: hidden; width: 220px; height: 220px; background: #000; margin-left: auto; margin-right: auto; }
-        .btn-neon { background: linear-gradient(45deg, var(--blue), #8a2be2); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin: 5px; font-weight: 600; }
-        #label-container { margin-top: 15px; display: flex; flex-direction: column; gap: 8px; align-items: center; }
-        /* Aloqa */
-        .contact-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 1px solid var(--blue); color: white; text-decoration: none; text-align: center; transition: 0.3s; }
-        .contact-btn:hover { background: var(--blue); color: black; }
+        /* Bio Box */
+        .bio-box { max-width: 650px; margin: 20px auto; line-height: 1.8; font-size: 14px; text-align: center; color: rgba(255,255,255,0.9); }
+
+        /* Kamera va Maqolalar uslubi */
+        .content-box { max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid var(--blue); text-align: center; }
+        .btn-neon { background: linear-gradient(45deg, var(--blue), #8a2be2); color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; margin: 10px; }
+        
+        #webcam-container { margin: 20px auto; border: 2px solid var(--blue); border-radius: 15px; overflow: hidden; width: 200px; height: 200px; background: #000; }
+        .result-tag { color: var(--blue); font-weight: bold; margin-top: 10px; font-size: 18px; }
+        .article-link { display: block; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; color: white; text-decoration: none; border-left: 4px solid var(--pink); text-align: left; }
+        .article-link:hover { background: rgba(255,20,147,0.1); }
     </style>
 </head>
 <body>
@@ -66,6 +71,7 @@
     <nav>
         <div class="nav-container">
             <a onclick="showPage('home')">Bosh Sahifa</a>
+            <a onclick="showPage('biografiya')">Biografiya</a>
             <a onclick="showPage('maqolalar')">Maqolalar</a>
             <a onclick="showPage('kamera')">AI Kamera</a>
             <a onclick="showPage('aloqa')">Aloqa</a>
@@ -76,40 +82,58 @@
         <div class="hero">
             <img src="profil.jpg" alt="Gulhayo" class="profile-img">
             <h1 class="name">Gulhayo Abdug'aniyeva</h1>
-            <p class="bio-text">
-                Qarshi davlat universiteti, Kompyuter ilmlari fakulteti, Axborot tizimlari va texnologiyalari yo‘nalishi talabasiman. 
-                <br>
-                Universitet sayti: <a href="http://qarshidu.uz" target="_blank" style="color: var(--blue);">qarshidu.uz</a>
-            </p>
-        </div>
-    </div>
-
-    <div id="maqolalar" class="page">
-        <h2 class="name" style="font-size: 40px; text-align: center;">Maqolalarim</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Sun'iy intellekt va jamiyat</h3>
-                <p style="font-size: 13px; opacity: 0.7; margin: 10px 0;">Ilmiy izlanishlar natijalari va maqolalar to'plami.</p>
-                <a href="313-320.pdf" target="_blank"><button class="btn-neon">O'qish</button></a>
+            <p class="sub-title">AI RESEARCHER & CREATIVE DEVELOPER</p>
+            
+            <div class="menu-grid">
+                <div class="menu-card" onclick="showPage('biografiya')"><i>📖</i><h3>Biografiya</h3><p>Men haqimda</p></div>
+                <div class="menu-card" onclick="showPage('maqolalar')"><i>📄</i><h3>Maqolalar</h3><p>Ilmiy ishlarim</p></div>
+                <div class="menu-card" onclick="showPage('kamera')"><i>🧠</i><h3>AI Kamera</h3><p>Modelni sinash</p></div>
+                <div class="menu-card" onclick="showPage('aloqa')"><i>📱</i><h3>Aloqa</h3><p>Bog'lanish</p></div>
             </div>
         </div>
     </div>
 
+    <div id="biografiya" class="page">
+        <div class="hero"><h1 class="name" style="font-size: 35px;">Biografiya</h1></div>
+        <div class="bio-box">
+            <p><strong>Qarshi davlat universiteti</strong>, Kompyuter ilmlari fakulteti, <strong>Axborot tizimlari va texnologiyalari</strong> yo‘nalishi talabasiman. Hozirda Sun’iy intellektning jamiyat hayotidagi roli va ma’lumotlar bazasini intellektual boshqarish yo‘nalishlarida ilmiy izlanishlar olib boryapman.</p>
+            <br>
+            <p>Maqsadim — murakkab algoritmlar va zamonaviy texnologiyalar yordamida insoniyat mushkulini oson qiladigan raqamli yechimlar yaratish.</p>
+            <br>
+            <p>Universitet sayti: <a href="http://qarshidu.uz" target="_blank" style="color: var(--blue);">qarshidu.uz</a></p>
+        </div>
+    </div>
+
+    <div id="maqolalar" class="page">
+        <div class="hero"><h1 class="name" style="font-size: 35px;">Maqolalarim</h1></div>
+        <div style="max-width: 600px; margin: 0 auto;">
+            <a href="maqola1.pdf" class="article-link">
+                <strong>1. Sun'iy intellektning jamiyatdagi o'rni</strong>
+                <p style="font-size: 11px; opacity: 0.6;">Tadqiqot maqolasi (PDF)</p>
+            </a>
+            <a href="313-320.pdf" class="article-link">
+                <strong>2. Ma'lumotlar bazasini intellektual boshqarish</strong>
+                <p style="font-size: 11px; opacity: 0.6;">Ilmiy ish (PDF)</p>
+            </a>
+        </div>
+    </div>
+
     <div id="kamera" class="page">
-        <div class="camera-box">
-            <h2 class="name" style="font-size: 30px;">AI Kamera</h2>
-            <button class="btn-neon" onclick="init()">Start</button>
-            <button class="btn-neon" style="background: #444;" onclick="stopWebcam()">Stop</button>
+        <div class="content-box">
+            <h2 class="name" style="font-size: 28px; margin-bottom: 10px;">AI Kamera</h2>
+            <button class="btn-neon" onclick="init()">Kamerani Yoqish</button>
+            <button class="btn-neon" style="background: #333;" onclick="stopWebcam()">O'chirish</button>
             <div id="webcam-container"></div>
             <div id="label-container"></div>
         </div>
     </div>
 
     <div id="aloqa" class="page">
-        <h2 class="name" style="font-size: 40px; text-align: center;">Aloqa</h2>
-        <div style="max-width: 400px; margin: 0 auto;">
-            <a href="https://t.me/gulhayo36" target="_blank" class="contact-btn">Telegram: @gulhayo36</a>
-            <a href="mailto:gulhayoabduganiyeva36@gmail.com" class="contact-btn">Email yuborish</a>
+        <div class="content-box" style="border-color: var(--pink);">
+            <h2 class="name" style="font-size: 30px; margin-bottom: 20px;">Aloqa</h2>
+            <p style="margin-bottom: 10px;">📞 Tel: <a href="tel:+998901234567" style="color: var(--glow); text-decoration: none;">+998 90 123 45 67</a></p>
+            <p style="margin-bottom: 10px;">✈️ Telegram: <a href="https://t.me/gulhayo36" target="_blank" style="color: var(--blue); text-decoration: none;">@gulhayo36</a></p>
+            <p>📧 Email: <span style="font-size: 13px;">gulhayoabduganiyeva36@gmail.com</span></p>
         </div>
     </div>
 
@@ -120,55 +144,47 @@
             if (pageId !== 'kamera') stopWebcam();
         }
 
-        // SIZNING YANGI MODEL LINKINGIZ
         const URL = "https://teachablemachine.withgoogle.com/models/RF7GAuukE/"; 
-
         let model, webcam, labelContainer, maxPredictions, animationId;
 
         async function init() {
             model = await tmImage.load(URL + "model.json", URL + "metadata.json");
             maxPredictions = model.getTotalClasses();
-            webcam = new tmImage.Webcam(220, 220, true); 
-            await webcam.setup(); 
-            await webcam.play();
+            webcam = new tmImage.Webcam(200, 200, true); 
+            await webcam.setup(); await webcam.play();
             animationId = window.requestAnimationFrame(loop);
-            document.getElementById("webcam-container").innerHTML = ""; 
+            document.getElementById("webcam-container").innerHTML = "";
             document.getElementById("webcam-container").appendChild(webcam.canvas);
             labelContainer = document.getElementById("label-container");
-            labelContainer.innerHTML = "";
-            for (let i = 0; i < maxPredictions; i++) {
-                const div = document.createElement("div");
-                div.className = "result-tag";
-                labelContainer.appendChild(div);
-            }
         }
 
         async function loop() {
             if (webcam && webcam.canvas) {
-                webcam.update();
-                await predict();
+                webcam.update(); await predict();
                 animationId = window.requestAnimationFrame(loop);
             }
         }
+
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
-            for (let i = 0; i < maxPredictions; i++) {
-                const classPrediction = prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
-                labelContainer.childNodes[i].innerHTML = classPrediction;
-            }
+            labelContainer.innerHTML = "";
+            prediction.forEach(p => {
+                if (p.probability > 0.1) {
+                    const div = document.createElement("div");
+                    div.className = "result-tag";
+                    div.innerHTML = p.className + ": " + (p.probability * 100).toFixed(0) + "%";
+                    labelContainer.appendChild(div);
+                }
+            });
         }
 
         function stopWebcam() {
             if (webcam) {
-                webcam.stop();
-                window.cancelAnimationFrame(animationId);
+                webcam.stop(); window.cancelAnimationFrame(animationId);
                 document.getElementById("webcam-container").innerHTML = "";
-                labelContainer.innerHTML = "";
-                webcam = null;
+                labelContainer.innerHTML = ""; webcam = null;
             }
         }
     </script>
 </body>
 </html>
-        
-        .result-tag { background: rgba(0, 191, 255, 0.1); padding: 8px 15px; border-radius: 10px; border: 1px solid rgba(0, 191, 255, 0.3); width: 85%; font-size: 14px; color: var(--blue); font-weight: 600; }
