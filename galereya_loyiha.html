@@ -1,0 +1,52 @@
+<!-- ===== Loyiha kartasi: Suhbat. Galereya bo'limiga shu blokni to'liq nusxalab qo'ying ===== -->
+<style>
+.proj-card{max-width:760px;margin:32px auto;background:#fff;color:#1d2340;border:1px solid #d9d6cc;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);text-align:left;box-shadow:0 6px 24px rgba(29,35,64,.14)}
+.proj-card *{box-sizing:border-box}
+.proj-art{background:#25388f;display:flex;align-items:center;justify-content:center;padding:20px}
+.proj-art svg{width:100%;height:auto;max-width:340px}
+.proj-body{padding:22px}
+.proj-body h3{margin:0 0 8px;font-size:22px;color:#1d2340}
+.proj-body p{margin:0 0 12px;line-height:1.5;color:#3a4060}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
+.proj-tags li{background:#eef0fa;color:#25388f;font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;margin:0}
+.proj-links{display:flex;flex-wrap:wrap;gap:10px}
+.proj-links a{display:inline-block;background:#f0a92e;color:#1d2340;font-weight:700;text-decoration:none;padding:10px 16px;border-radius:8px}
+.proj-links a:hover{filter:brightness(.95)}
+.proj-links a.alt{background:#fff;border:1.5px solid #25388f;color:#25388f}
+.proj-note{margin:12px 0 0;font-size:13px;color:#6b7088}
+@media(max-width:640px){.proj-card{grid-template-columns:1fr;margin:24px 12px}}
+</style>
+
+<article class="proj-card">
+  <div class="proj-art">
+    <svg viewBox="0 0 320 220" role="img" aria-label="Suhbat chat ilovasining ko'rinishi">
+      <rect x="10" y="10" width="300" height="200" rx="12" fill="#f6f4ef"/>
+      <path d="M10 22a12 12 0 0 1 12-12h276a12 12 0 0 1 12 12v22H10z" fill="#1d2340"/>
+      <text x="24" y="33" fill="#fff" font-size="13" font-weight="700" font-family="Segoe UI,Arial,sans-serif"># umumiy</text>
+      <circle cx="288" cy="28" r="5" fill="#4fd1a5"/>
+      <rect x="24" y="58" width="150" height="34" rx="12" fill="#fff" stroke="#d9d6cc"/>
+      <text x="36" y="79" fill="#1d2340" font-size="12" font-family="Segoe UI,Arial,sans-serif">Salom! Qalaysiz?</text>
+      <rect x="130" y="102" width="166" height="34" rx="12" fill="#25388f"/>
+      <text x="142" y="123" fill="#fff" font-size="12" font-family="Segoe UI,Arial,sans-serif">Zo'r, loyiha tayyor!</text>
+      <rect x="24" y="146" width="120" height="28" rx="12" fill="#fff" stroke="#d9d6cc"/>
+      <text x="36" y="164" fill="#1d2340" font-size="12" font-family="Segoe UI,Arial,sans-serif">Tabriklayman</text>
+      <rect x="22" y="182" width="206" height="20" rx="8" fill="#fff" stroke="#d9d6cc"/>
+      <rect x="236" y="182" width="62" height="20" rx="8" fill="#f0a92e"/>
+    </svg>
+  </div>
+  <div class="proj-body">
+    <h3>Suhbat: real vaqtli chat</h3>
+    <p>Vue 3, FastAPI va SQL ma'lumotlar bazasi asosida yaratilgan veb tizim: ro'yxatdan o'tish, chat xonalari va WebSocket orqali real vaqtda xabar almashish.</p>
+    <ul class="proj-tags">
+      <li>HTML5</li><li>CSS</li><li>JavaScript</li><li>Vue 3</li><li>FastAPI</li><li>SQLite</li><li>WebSocket</li>
+    </ul>
+    <div class="proj-links">
+      <!-- 1) GitHub'da "suhbat" nomli repozitoriy yarating yoki havolani o'zingiznikiga almashtiring -->
+      <a href="https://github.com/gulhayo36/suhbat" target="_blank" rel="noopener">💻 Kodni ko'rish</a>
+      <!-- 2) Jonli demo havolangiz bo'lsa, quyidagi qatorning izohini olib tashlang va manzilni yozing -->
+      <!-- <a class="alt" href="https://SIZNING-DEMO-HAVOLANGIZ" target="_blank" rel="noopener">▶ Jonli demo</a> -->
+    </div>
+    <p class="proj-note">Backend serverda ishlaydi, shuning uchun chat demosi faqat server yoqilgan paytda ochiladi.</p>
+  </div>
+</article>
+<!-- ===== Blok oxiri ===== -->

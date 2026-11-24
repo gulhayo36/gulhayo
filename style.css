@@ -1,138 +1,66 @@
-/* 1. Umumiy sozlamalar */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+:root{--ink:#1d2340;--lapis:#25388f;--saffron:#f0a92e;--mint:#dff3ee;--paper:#f6f4ef;--line:#d9d6cc;--muted:#6b7088;
+  font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}
+html,body,#app{height:100%;margin:0}
+body{background:var(--paper);color:var(--ink);line-height:1.45}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--saffron);outline-offset:2px}
+.boot{display:grid;place-items:center;height:100%;color:var(--muted)}
+.btn{background:var(--saffron);color:var(--ink);border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}
+.btn:hover{filter:brightness(.95)}.btn:disabled{opacity:.6;cursor:wait}
+input[type=text],input[type=password]{padding:12px 14px;border:1.5px solid var(--line);border-radius:8px;background:#fff;width:100%}
+.err{color:#a33a29;font-size:14px;margin:0}
 
-body {
-    background: #0a0118; /* To'q fon */
-    background-image: 
-        radial-gradient(circle at 50% 20%, rgba(255, 20, 147, 0.4), transparent 60%),
-        url('https://www.transparenttextures.com/patterns/stardust.png');
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-}
+/* Kirish / ro'yxatdan o'tish */
+.login{min-height:100%;display:grid;grid-template-columns:1fr 1fr}
+.login-art{background:var(--lapis);color:#fff;display:flex;align-items:flex-end;padding:48px;
+  background-image:repeating-linear-gradient(45deg,transparent 0 26px,rgba(240,169,46,.22) 26px 28px),
+  repeating-linear-gradient(-45deg,transparent 0 26px,rgba(255,255,255,.08) 26px 28px)}
+.login-art h1{font-size:clamp(48px,7vw,88px);line-height:1;margin:0;letter-spacing:-.02em}
+.login-art p{margin:12px 0 0;max-width:28ch;opacity:.85}
+.login-form{display:flex;align-items:center;justify-content:center;padding:32px}
+.login-form form{width:min(360px,100%);display:grid;gap:14px}
+.login-form h2{margin:0}
+label{display:grid;gap:6px;font-weight:600;font-size:14px}
+.switch{background:none;border:0;color:var(--lapis);text-decoration:underline;cursor:pointer;font-weight:600;padding:4px}
 
-/* 2. Navigatsiya */
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    padding: 10px 30px;
-    border-radius: 30px;
-    margin-top: 20px;
-    border: 1px solid rgba(255, 20, 147, 0.3);
-}
+/* Chat */
+.app{height:100%;display:grid;grid-template-columns:270px 1fr}
+.side{background:var(--ink);color:#fff;padding:20px;display:flex;flex-direction:column;gap:16px;overflow:auto}
+.side h3{margin:0;font-size:22px}.side .who{margin:4px 0 0;opacity:.75;font-size:14px}
+.side h4{margin:0;font-size:13px;font-weight:600;opacity:.65}
+.rooms{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.rooms button{width:100%;text-align:left;background:transparent;border:0;color:#fff;padding:9px 10px;border-radius:8px;cursor:pointer;display:flex;justify-content:space-between;gap:8px}
+.rooms button:hover{background:rgba(255,255,255,.1)}
+.rooms button.active{background:var(--lapis)}
+.rooms small{opacity:.65;white-space:nowrap}
+.newroom{display:flex;gap:8px}.newroom input{padding:9px 10px}
+.newroom .btn{padding:9px 14px}
+.side .err{color:#ffb4a5}
+.leave{margin-top:auto;background:transparent;border:1.5px solid rgba(255,255,255,.35);color:#fff;border-radius:8px;padding:10px;cursor:pointer}
+.leave:hover{background:rgba(255,255,255,.1)}
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 13px;
-    transition: 0.3s;
-}
+.chat{display:flex;flex-direction:column;min-width:0;height:100%}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px;background:#fff;border-bottom:1px solid var(--line)}
+.muted{color:var(--muted);font-size:14px}
+.badge{font-size:13px;padding:3px 10px;border-radius:99px;background:var(--mint);color:#1d5a4a;white-space:nowrap}
+.badge.offline,.badge.connecting{background:#fbe3d9;color:#8a3414}
+.feed{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:10px}
+.empty{margin:auto;color:var(--muted)}
+.msg{max-width:min(560px,82%);padding:9px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);align-self:flex-start}
+.msg.me{align-self:flex-end;background:var(--lapis);color:#fff;border-color:var(--lapis)}
+.meta{font-size:13px;color:var(--muted);margin-bottom:2px;display:flex;gap:10px;align-items:center}
+.msg.me .meta{color:rgba(255,255,255,.75)}
+.text{white-space:pre-wrap;overflow-wrap:anywhere}
+.x{background:none;border:0;color:inherit;cursor:pointer;font-size:16px;line-height:1;padding:0 4px;opacity:.7}
+.x:hover{opacity:1}
+.composer{display:flex;gap:10px;padding:14px 20px;border-top:1px solid var(--line);background:#fff}
+.composer input{flex:1;min-width:0}
+.composer-err{padding:4px 20px 0;background:#fff}
 
-nav ul li a:hover {
-    color: #ff69b4;
-    text-shadow: 0 0 10px #ff69b4;
-}
-
-/* 3. Profil qismi */
-.profile-wrapper {
-    margin-top: 50px;
-    position: relative;
-    text-align: center;
-}
-
-.profile-ring {
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    padding: 5px;
-    background: linear-gradient(45deg, #ff1493, #8a2be2);
-    box-shadow: 0 0 30px #ff1493; /* Neon porlash */
-    margin: 0 auto;
-}
-
-.profile-ring img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #0a0118;
-}
-
-/* 4. Ism va Shriftlar */
-.name {
-    font-family: 'Dancing Script', cursive; /* Yozma shrift */
-    font-size: 70px;
-    color: #ff69b4;
-    text-shadow: 0 0 20px #ff1493, 0 0 40px #ff1493;
-    margin-top: 15px;
-}
-
-.occupation {
-    font-size: 16px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: 300;
-    opacity: 0.8;
-}
-
-/* 5. Kartalar (Yo'nalishlar) */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 ta ustun */
-    gap: 15px;
-    max-width: 900px;
-    margin-top: 50px;
-    padding: 20px;
-}
-
-.card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 20, 147, 0.4);
-    border-radius: 20px;
-    padding: 25px 10px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    transition: 0.4s;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 25px rgba(255, 20, 147, 0.6);
-}
-
-.card h3 {
-    font-size: 16px;
-    color: #ff69b4;
-    margin: 10px 0 5px;
-}
-
-.card p {
-    font-size: 11px;
-    opacity: 0.7;
-}
-
-/* 6. Pastki yer effekti */
-.footer-earth {
-    position: fixed;
-    bottom: -100px;
-    width: 120%;
-    height: 250px;
-    background: radial-gradient(circle, rgba(0, 191, 255, 0.3), transparent 70%);
-    z-index: -1;
-}
-
-/* Mobil uchun */
-@media (max-width: 700px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-    .name { font-size: 50px; }
+@media(max-width:760px){
+  .login{grid-template-columns:1fr;grid-template-rows:180px 1fr}.login-art{padding:24px}
+  .app{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .side{padding:12px 16px;max-height:44vh;gap:10px}
+  .side h4,.side .who{display:none}
 }
